@@ -15,20 +15,36 @@ class Main:
       ))
 
       if choice == 1:
-
+        
+        Login = input("Enter your login:")
+        Password = input("Enter your password : ")
         print("creation of the database")
         Database.create_database()
         print("database create")
         choice_menu = 1
 
       if choice == 2:
+        Login = input("Enter your login:")
+        while Login !=("Login"):
 
-        Database.connecting()
-        print("successful connection")
-        choice_menu = 1
+          Login = input("Incorrect username. Try Again")
+          if Login == ("Login"):
+
+            Password = input("Enter your password : ")
+
+            while Password != ("Password"):
+
+              Password = input("Incorrect password. Try Again")
+
+              if Password == ("Password"):
+
+                Database.connecting()
+                print("successful connection")
+                choice_menu = 1
 
       if choice == 3:
 
+        print("Bye, Bye")
         authentication = 0
 
       while choice_menu:
