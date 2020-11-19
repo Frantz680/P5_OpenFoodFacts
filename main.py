@@ -1,78 +1,62 @@
-from database import Database
+import mysql.connector
+from api import *
+from database import *
 
-class Main:
+class Main():
 
-  def connecting(self):
+    def __init__(self):
+        pass
 
-    print("Welcome to OpenFoodFact")
-    authentication = 1
 
-    while authentication:
-      choice = int(input(
-        "Press 1 for creating new profile.\n"
-        "Press 2 for connecting.\n"
-        "Press 3 for exit.\n"
-      ))
-
-      if choice == 1:
-        
-        Login = input("Enter your login:")
-        Password = input("Enter your password : ")
-        print("creation of the database")
-        Database.create_database()
-        print("database create")
+    def connecting(self):
+        data = Database()
+        data.create_database()
+        "data.connecting()"
         choice_menu = 1
 
-      if choice == 2:
-        Login = input("Enter your login:")
-        while Login !=("Login"):
+        while choice_menu:
 
-          Login = input("Incorrect username. Try Again")
-          if Login == ("Login"):
+            choice = int(input(
+                "Press 1 for research substituted.\n"
+                "Press 2 for my substituted foods.\n"
+                "Press 3 for exit.\n"
+            ))
 
-            Password = input("Enter your password : ")
+            if choice == 1:
+                category()
 
-            while Password != ("Password"):
-
-              Password = input("Incorrect password. Try Again")
-
-              if Password == ("Password"):
-
-                Database.connecting()
-                print("successful connection")
-                choice_menu = 1
-
-      if choice == 3:
-
-        print("Bye, Bye")
-        authentication = 0
-
-      while choice_menu:
-
-        choice = int(input(
-          "Press 1 for research substituted.\n"
-          "Press 2 for my substituted foods.\n"
-          "Press 3 for exit.\n"
-        ))
-
-        if choice == 1:
-          print("")
+            elif choice == 2:
+                self.my_substituted()
 
 
-
-        if choice == 2:
-          print("")
-
-
-        if choice == 3:
-          authentication = 0
-          choice_menu = 0
+            elif choice == 3:
+                data.data_close()
+                choice_menu = 0
 
 
+    def my_substituted(self):
+        choice_substituted = 1
+
+        while choice_substituted:
+
+            choice = int(input(
+                "Press 1 to see favored substitutes.\n"
+                "Press 2 to remove substitutes.\n"
+                "Press 3 to return to the menu.\n"
+            ))
+
+            if choice == 1:
+                print("favori")
+
+            if choice == 2:
+                print("sup")
+
+            if choice == 3:
+                self.connecting()
 
 def main():
-  reception = Main()
-  reception.connecting()
+    reception = Main()
+    reception.connecting()
 
 
 if __name__ == '__main__':
