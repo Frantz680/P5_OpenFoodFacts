@@ -1,5 +1,3 @@
-import mysql.connector
-
 class Glob:
 
     host = "localhost"
