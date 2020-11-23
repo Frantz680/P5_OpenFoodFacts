@@ -32,12 +32,12 @@ class MySQL:
                         name VARCHAR(250) NOT NULL,\
                         PRIMARY KEY (category_id));")
         self.cursor.execute("CREATE TABLE Food (\
-                        id INT AUTO_INCREMENT NOT NULL,\
-                        category_id INT NOT NULL,\
+                        food_id INT AUTO_INCREMENT NOT NULL,\
+                        cat_id INT NOT NULL,\
                         food_name VARCHAR(150) NOT NULL,\
                         food_url VARCHAR(300) NOT NULL,\
                         food_shop VARCHAR(300),\
-                        PRIMARY KEY (id, category_id));")
+                        PRIMARY KEY (food_id, cat_id));")
         self.cursor.execute("CREATE TABLE Substitute (\
                 id INT AUTO_INCREMENT NOT NULL,\
                 substitute_name VARCHAR(150) NOT NULL,\
@@ -69,7 +69,7 @@ class MySQL:
     def insert_data_product(self, p_category, p_product_name, p_product_url, p_product_shop):
 
         self.cursor = self.db_connect.cursor()
-        sql = "INSERT INTO Food (id, category_id, food_name, food_url, food_shop) VALUES (%s, %s, %s, %s, %s)"
+        sql = "INSERT INTO Food (food_id, cat_id, food_name, food_url, food_shop) VALUES (%s, %s, %s, %s, %s)"
         val = (self.cursor.lastrowid, p_category, p_product_name, p_product_url, p_product_shop)
         self.cursor.execute(sql, val)
 
@@ -78,10 +78,29 @@ class MySQL:
         """print(self.cursor.rowcount, "record inserted.")"""
 
     def select_category(self):
-        select_category = "SELECT name FROM Category;"
+        select_category = "SELECT category_id, name FROM Category;"
         self.cursor.execute(select_category)
-        for name in self.cursor:
-            print(name)
+        for category_id, name in self.cursor:
+            print(str(category_id) + "->" + str(name))
+
+    def select_cat_food(self, p_choice_category):
+        select_cat_food = 'SELECT food_id, food_name FROM Food\
+        INNER JOIN Category\
+        ON Category.category_id = Food.cat_id\
+        WHERE Category.category_id = %s;'
+        self.cursor.execute(select_cat_food, p_choice_category)
+        for food_id, food_name in self.cursor:
+            print(str(food_id) + "->" + str(food_name))
+
+    def select_food(self, p_choice_product):
+        select_food = 'SELECT food_name, food_url, food_shop FROM Food\
+        WHERE Food.food_id = %s;'
+        self.cursor.execute(select_food, p_choice_product)
+        for food_name, food_url, food_shop in self.cursor:
+            print("name->" + str(food_name) + "\nURL->" + str(food_url) + "\nSHOP->" + str(food_shop))
+
+    "def substitue(self):"
+
 
     def data_close(self):
 

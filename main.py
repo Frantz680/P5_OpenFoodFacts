@@ -27,9 +27,15 @@ class Main():
             if choice == 1:
                 print("Sélectionnez la catégorie")
                 self.database.select_category()
-                choice_category = int(input("Tap the category number"))
 
+                choice_category = (int(input("Tap the category number")),)
+                self.database.select_cat_food(choice_category)
 
+                choice_product = (int(input("Tap the product number")),)
+                self.database.select_food(choice_product)
+
+                print("Le substitue proposer pour ce produit est :")
+                "self.database.substitue()"
 
 
             elif choice == 2:
@@ -88,7 +94,7 @@ class Main():
                 """print(produit["product_name"] + " -> " + str(emplacement))"""
                 product_name = produit["product_name"]
                 product_url = produit["url"]
-                product_shop = "rien"
+                product_shop = ""
                 self.database.insert_data_product(category, product_name, product_url, product_shop)
             print(".", end="")
         print("\nChargement terminée")
