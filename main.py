@@ -61,8 +61,8 @@ class Main:
                     choice_product = (int(input("Tap the product number")),)
                     self.database.select_food(choice_product)
 
-                    print("Le substitue proposer pour ce produit est :")
-                    "self.database.substitue()"
+                    """print("Le substitue proposer pour ce produit est :")
+                    self.database.substitue(choice_product)"""
 
                 elif choice == 2:
                     self.my_substituted()
@@ -105,7 +105,7 @@ class Main:
                     print("Please enter a number between 1-3.\nThank you.")
 
             except ValueError:
-                print("Please enter a number between 1-3.\nThank you.")
+                print("Please enter a whole number.\nThank you.")
 
     def request_category(self):
         """
@@ -130,6 +130,7 @@ class Main:
         product_name = ""
         product_url = ""
         product_shop = ""
+        product_nutrition = ""
 
         print("Chargement des aliments dans la database")
 
@@ -144,11 +145,22 @@ class Main:
                 emplacement += 1
 
                 """print(produit["product_name"] + " -> " + str(emplacement))"""
-                product_name = produit["product_name"]
-                product_url = produit["url"]
-                product_shop = ""
 
-                self.database.insert_data_product(category, product_name, product_url, product_shop)
+                product_name = produit["product_name"]
+
+                product_url = produit["url"]
+
+                try:
+                    product_shop = produit["stores"]
+                except KeyError:
+                    pass
+
+                try:
+                    product_nutrition = produit["nutrition_grades"]
+                except KeyError:
+                    pass
+
+                self.database.insert_data_product(category, product_name, product_url, product_shop, product_nutrition)
 
             print(".", end="")
 
