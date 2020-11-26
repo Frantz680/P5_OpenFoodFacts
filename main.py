@@ -55,14 +55,14 @@ class Main:
                     print("Sélectionnez la catégorie")
                     self.database.select_category()
 
-                    choice_category = (int(input("Tap the category number")),)
+                    choice_category = (int(input("Tap the category number")),) # (int(input(),) pour faire un tuple
                     self.database.select_cat_food(choice_category)
 
                     choice_product = (int(input("Tap the product number")),)
                     self.database.select_food(choice_product)
 
-                    """print("Le substitue proposer pour ce produit est :")
-                    self.database.substitue(choice_product)"""
+                    print("Le substitue proposer pour ce produit est :")
+                    self.database.substitue(choice_category)
 
                 elif choice == 2:
                     self.my_substituted()

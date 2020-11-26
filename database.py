@@ -36,6 +36,21 @@ class MySQL:
         )
         self.cursor = self.db_connect.cursor()
 
+        self.cetegory_id = 0
+
+        self.cat_id = 0
+        self.food_id = ""
+        self.food_name = ""
+        self.food_url = ""
+        self.food_shop = ""
+        self.food_nutrition = ""
+
+        self.substitute_id = 0
+        self.substitute_name = ""
+        self.substitute_url = ""
+        self.substitute_shop = ""
+        self.substitute_nutrition = ""
+
     def create_database(self):
         """
         We are creating the database.
@@ -129,15 +144,15 @@ class MySQL:
         from the Food table. But we also make a join
         between two tables.
         """
-
+        print(p_choice_category)
         select_cat_food = 'SELECT food_id, food_name FROM Food\
         INNER JOIN Category\
         ON Category.category_id = Food.cat_id\
         WHERE Category.category_id = %s;'
 
         self.cursor.execute(select_cat_food, p_choice_category)
-        for food_id, food_name in self.cursor:
-            print(str(food_id) + "->" + str(food_name))
+        for self.food_id, self.food_name in self.cursor:
+            print(str(self.food_id) + "->" + str(self.food_name))
 
     def select_food(self, p_choice_product):
         """
@@ -149,8 +164,36 @@ class MySQL:
         WHERE Food.food_id = %s;'
 
         self.cursor.execute(select_food, p_choice_product)
-        for food_name, food_url, food_shop, food_nutrition in self.cursor:
-            print("NAME->" + str(food_name) + "\nURL->" + str(food_url) + "\nSHOP->" + str(food_shop) + "\nNUTRI->" + str(food_nutrition))
+        for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
+            print("Le produit que vous avez selectionnez est :")
+            print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
+
+    def substitue(self, p_choice_category):
+
+        id_substitue = "1"
+        nutri_substitue = 102 # 102 == f ASCII
+        substitue = 'SELECT food_id, food_nutrition FROM Food\
+                INNER JOIN Category\
+                ON Category.category_id = Food.cat_id\
+                WHERE Category.category_id = %s;'
+
+        self.cursor.execute(substitue, p_choice_category)
+        for self.food_id, self.food_nutrition in self.cursor:
+            "print(self.food_id, ord(self.food_nutrition))"
+            for increment in range(5):
+                """print("increment" + str(increment + 97))"""
+                if ord(self.food_nutrition) <= increment + 97 and ord(self.food_nutrition) < nutri_substitue:
+                    id_substitue = self.food_id
+                    nutri_substitue = ord(self.food_nutrition)
+
+        "print(id_substitue, nutri_substitue)"
+
+        select_substitue = 'SELECT food_name, food_url, food_shop, food_nutrition FROM Food\
+                WHERE Food.food_id = %s;'
+
+        self.cursor.execute(select_substitue, (int(id_substitue),))
+        for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
+            print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
 
     def data_close(self):
         """
