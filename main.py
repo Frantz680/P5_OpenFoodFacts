@@ -44,68 +44,81 @@ class Main:
         choice_menu = 1
 
         while choice_menu:
-            try:
-                choice = int(input(
-                    "Press 1 for research substituted.\n"
-                    "Press 2 for my substituted foods.\n"
-                    "Press 3 for exit.\n"
-                ))
 
-                if choice == 1:
-                    print("Sélectionnez la catégorie")
-                    self.database.select_category()
+            choice = input(
+                "Press 1 for research substituted.\n"
+                "Press 2 for my substituted foods.\n"
+                "Press 3 for exit.\n"
+            )
 
-                    choice_category = (int(input("Tap the category number")),) # (int(input(),) pour faire un tuple
-                    self.database.select_cat_food(choice_category)
+            if choice == "1":
+                print("Sélectionnez la catégorie")
+                self.database.select_category()
 
-                    choice_product = (int(input("Tap the product number")),)
-                    self.database.select_food(choice_product)
+                choice_category = (input("Tap the category number"),)# (int(input()),) pour faire un tuple
+                self.database.select_cat_food(choice_category)
 
-                    print("Le substitue proposer pour ce produit est :")
-                    self.database.substitue(choice_category)
+                choice_product = (input("Tap the product number"),)
+                self.database.select_food(choice_product)
 
-                elif choice == 2:
-                    self.my_substituted()
+                print("Le substitue proposer pour ce produit est :")
+                self.database.select_substitue(choice_category)
 
-                elif choice == 3:
-                    self.database.data_close()
-                    choice_menu = 0
+                saved = input("Voulez vous sauvegardez ce substitue ?\nTapez 1 pour oui.\nTapez 2 pour non.\n")
 
+                if saved == "1":
+                    self.database.insert_substitute_save()
+
+                elif saved == "2":
+                    pass
                 else:
-                    print("Please enter a number between 1-3.\nThank you.")
+                    print("Please enter a number between 1-2.\nThank you.")
 
-            except ValueError:
-                print("Please enter a whole number.\nThank you.")
+            elif choice == "2":
+                self.my_substituted()
+
+            elif choice == "3":
+                self.database.data_close()
+                choice_menu = 0
+
+            else:
+                print("Please enter a number between 1-3.\nThank you.")
 
     def my_substituted(self):
         """
         This method allows you to see the favorite substitutes and delete them.
         """
 
-        choice_substituted = 1
+        substituted = 1
 
-        while choice_substituted:
-            try:
-                choice = int(input(
-                    "Press 1 to see favored substitutes.\n"
-                    "Press 2 to remove substitutes.\n"
-                    "Press 3 to return to the menu.\n"
-                ))
+        while substituted:
 
-                if choice == 1:
-                    print("favori")
+            choice = input(
+                "Press 1 to see favored substitutes.\n"
+                "Press 2 to remove substitutes.\n"
+                "Press 3 to return to the menu.\n"
+            )
 
-                elif choice == 2:
-                    print("sup")
+            if choice == "1":
+                print("Selectionnez votre substitue pour voir les information.")
+                self.database.select_substitute_save()
 
-                elif choice == 3:
-                    self.interraction_user()
+                choice_substituted = (input("Tap the substitute number.\n"),)
+                self.database.information_substitute_save(choice_substituted)
 
-                else:
-                    print("Please enter a number between 1-3.\nThank you.")
+            elif choice == "2":
+                print("Selectionnez le substitue à supprimer.")
+                self.database.select_substitute_save()
 
-            except ValueError:
-                print("Please enter a whole number.\nThank you.")
+                choice_delete = (input("Tap the substitute number.\n"),)
+                self.database.delete_substitute(choice_delete)
+
+            elif choice == "3":
+                self.interraction_user()
+
+            else:
+                print("Please enter a number between 1-3.\nThank you.")
+
 
     def request_category(self):
         """

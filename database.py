@@ -144,6 +144,7 @@ class MySQL:
         from the Food table. But we also make a join
         between two tables.
         """
+
         print(p_choice_category)
         select_cat_food = 'SELECT food_id, food_name FROM Food\
         INNER JOIN Category\
@@ -168,7 +169,12 @@ class MySQL:
             print("Le produit que vous avez selectionnez est :")
             print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
 
-    def substitue(self, p_choice_category):
+    def select_substitue(self, p_choice_category):
+        """
+        In this method we select different columns
+        from the Food table. But we also make a join
+        between two tables.
+        """
 
         id_substitue = "1"
         nutri_substitue = 102 # 102 == f ASCII
@@ -194,6 +200,53 @@ class MySQL:
         self.cursor.execute(select_substitue, (int(id_substitue),))
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
             print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
+
+    def insert_substitute_save(self):
+        """
+        Insertion of product information into the database.
+        """
+
+        self.cursor = self.db_connect.cursor()
+        sql = "INSERT INTO Substitute (substitute_id, substitute_name, substitute_url, substitute_shop, substitute_nutrition)\
+                 VALUES (%s, %s, %s, %s, %s)"
+        val = (self.cursor.lastrowid, self.food_name, self.food_url, self.food_shop, self.food_nutrition)
+        self.cursor.execute(sql, val)
+
+        self.db_connect.commit()
+
+    def select_substitute_save(self):
+        """
+        In this method, we save the selected substitutes.
+        """
+
+        select_substitute_save = 'SELECT substitute_id, substitute_name FROM Substitute'
+        self.cursor.execute(select_substitute_save)
+        for self.substitute_id, self.substitute_name in self.cursor:
+            print(str(self.substitute_id) + "->" + str(self.substitute_name))
+
+    def information_substitute_save(self, p_choice_substituted):
+        """
+        In this method, we display the information of the substitutes.
+        """
+
+        information_substitute_save = 'SELECT substitute_name,\
+        substitute_url, substitute_shop, substitute_nutrition FROM Substitute\
+        WHERE Substitute.substitute_id = %s;'
+
+        self.cursor.execute(information_substitute_save, p_choice_substituted)
+        for self.substitute_name, self.substitute_url, self.substitute_shop, self.substitute_nutrition in self.cursor:
+            print("\nNAME->" + str(self.substitute_name) + "\nURL->" + str(self.substitute_url) + "\nSHOP->" + str(self.substitute_shop) + "\nNUTRI->" + str(self.substitute_nutrition))
+
+    def delete_substitute(self, p_choice_delete):
+        """
+        In this method, we remove the substitutes save.
+        """
+
+        delete_substitute = 'DELETE FROM Substitute\
+         WHERE Substitute.substitute_id = %s;'
+
+        self.cursor.execute(delete_substitute, p_choice_delete)
+        print("Vous avez supprimer le produit numéro :" + (str(p_choice_delete)),)
 
     def data_close(self):
         """
