@@ -83,7 +83,7 @@ class MySQL:
                 substitute_nutrition CHAR(1),\
                 PRIMARY KEY (substitute_id));")
 
-        print("Création de la base de donnée")
+        print("Creation of the database.")
 
     def connecting_db(self):
         """
@@ -95,7 +95,7 @@ class MySQL:
             password=self.password,
             database=self.database
         )
-        print("Connection à la base de donnée")
+        print("Connection to the database.")
 
     def insert_data_category(self, p_category_name):
         """
@@ -145,7 +145,6 @@ class MySQL:
         between two tables.
         """
 
-        print(p_choice_category)
         select_cat_food = 'SELECT food_id, food_name FROM Food\
         INNER JOIN Category\
         ON Category.category_id = Food.cat_id\
@@ -166,7 +165,7 @@ class MySQL:
 
         self.cursor.execute(select_food, p_choice_product)
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
-            print("Le produit que vous avez selectionnez est :")
+            print("The product you have selected is:")
             print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
 
     def select_substitue(self, p_choice_category):
@@ -177,7 +176,8 @@ class MySQL:
         """
 
         id_substitue = "1"
-        nutri_substitue = 102 # 102 == f ASCII
+        # 102 ==  The letter "f" in ASCII
+        nutri_substitue = 102
         substitue = 'SELECT food_id, food_nutrition FROM Food\
                 INNER JOIN Category\
                 ON Category.category_id = Food.cat_id\
@@ -245,8 +245,11 @@ class MySQL:
         delete_substitute = 'DELETE FROM Substitute\
          WHERE Substitute.substitute_id = %s;'
 
+        # Convert a tuple to str
+        str_choice_delete = ''.join(p_choice_delete)
+
         self.cursor.execute(delete_substitute, p_choice_delete)
-        print("Vous avez supprimer le produit numéro :" + (str(p_choice_delete)),)
+        print("You have deleted the substitute number: :" + str_choice_delete)
 
     def data_close(self):
         """

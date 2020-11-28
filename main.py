@@ -46,25 +46,28 @@ class Main:
         while choice_menu:
 
             choice = input(
+                "\n#### MENU ####\n\n"
                 "Press 1 for research substituted.\n"
                 "Press 2 for my substituted foods.\n"
                 "Press 3 for exit.\n"
             )
 
             if choice == "1":
-                print("Sélectionnez la catégorie")
+                print("#### The categories ####\n")
                 self.database.select_category()
 
-                choice_category = (input("Tap the category number"),)# (int(input()),) pour faire un tuple
+                # (input(),) to make a tuple
+                choice_category = (input("\nTap the category number.\n"),)
+                print("\n#### The products ####\n")
                 self.database.select_cat_food(choice_category)
 
-                choice_product = (input("Tap the product number"),)
+                choice_product = (input("\nTap the product number.\n"),)
                 self.database.select_food(choice_product)
 
-                print("Le substitue proposer pour ce produit est :")
+                print("\nThe suggested substitute for this product is :")
                 self.database.select_substitue(choice_category)
 
-                saved = input("Voulez vous sauvegardez ce substitue ?\nTapez 1 pour oui.\nTapez 2 pour non.\n")
+                saved = input("\nDo you want to save overrides ?\nPress 1 for yes.\nPress 2 for yes.\n")
 
                 if saved == "1":
                     self.database.insert_substitute_save()
@@ -72,7 +75,7 @@ class Main:
                 elif saved == "2":
                     pass
                 else:
-                    print("Please enter a number between 1-2.\nThank you.")
+                    print("Please enter a number between 1-2.\nThank you.\n")
 
             elif choice == "2":
                 self.my_substituted()
@@ -94,23 +97,25 @@ class Main:
         while substituted:
 
             choice = input(
+                "\n#### FAVORED SUBSTITUTES ####\n\n"
                 "Press 1 to see favored substitutes.\n"
                 "Press 2 to remove substitutes.\n"
                 "Press 3 to return to the menu.\n"
             )
 
             if choice == "1":
-                print("Selectionnez votre substitue pour voir les information.")
+                print("### Your substitutes save ###")
                 self.database.select_substitute_save()
 
-                choice_substituted = (input("Tap the substitute number.\n"),)
+                print("Select your substitute to see the information.\n")
+                choice_substituted = (input("\nTap the substitute number.\n"),)
                 self.database.information_substitute_save(choice_substituted)
 
             elif choice == "2":
-                print("Selectionnez le substitue à supprimer.")
+                print("\nSelect the substitute to delete.\n")
                 self.database.select_substitute_save()
 
-                choice_delete = (input("Tap the substitute number.\n"),)
+                choice_delete = (input("\nTap the substitute number.\n"),)
                 self.database.delete_substitute(choice_delete)
 
             elif choice == "3":
@@ -119,57 +124,56 @@ class Main:
             else:
                 print("Please enter a number between 1-3.\nThank you.")
 
-
     def request_category(self):
         """
         Get category names from Open Food Facts.
         """
 
-        print("Chargement des catégories dans la database")
+        print("Loading categories into the database.")
 
-        for compteur in range(Glob.nb_category):
-            self.database.insert_data_category(self.category_json["tags"][compteur]["name"])
+        for counter in range(Glob.nb_category):
+            self.database.insert_data_category(self.category_json["tags"][counter]["name"])
             print(".", end="")
             time.sleep(0.009)
 
-        print("\nChargement terminée")
+        print("\nLoading completed.")
 
     def request_food(self):
         """
         Get product information from Open Food Facts.
         """
 
-        emplacement = 0
+        "emplacement = 0"
         product_name = ""
         product_url = ""
         product_shop = ""
         product_nutrition = ""
 
-        print("Chargement des aliments dans la database")
+        print("Loading food into the database.")
 
         for category in range(Glob.nb_category):
-            category_choisi_json = self.category_json["tags"][category - 1]
+            category_choice_json = self.category_json["tags"][category - 1]
             "print(category_choisi_json)"
 
-            reponse_categeory_json = json.loads(requests.get(category_choisi_json["url"] + ".json").text)
-            "print(reponse_categeory_json)"
+            answer_category_json = json.loads(requests.get(category_choice_json["url"] + ".json").text)
+            "print(answer_category_json)"
 
-            for produit in reponse_categeory_json["products"]:
-                emplacement += 1
+            for product in answer_category_json["products"]:
+                "emplacement += 1"
 
                 """print(produit["product_name"] + " -> " + str(emplacement))"""
 
-                product_name = produit["product_name"]
+                product_name = product["product_name"]
 
-                product_url = produit["url"]
+                product_url = product["url"]
 
                 try:
-                    product_shop = produit["stores"]
+                    product_shop = product["stores"]
                 except KeyError:
                     pass
 
                 try:
-                    product_nutrition = produit["nutrition_grades"]
+                    product_nutrition = product["nutrition_grades"]
                 except KeyError:
                     pass
 
@@ -177,7 +181,7 @@ class Main:
 
             print(".", end="")
 
-        print("\nChargement terminée")
+        print("\nLoading completed.")
 
 
 def main():
