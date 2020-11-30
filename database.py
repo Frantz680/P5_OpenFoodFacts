@@ -103,7 +103,8 @@ class MySQL:
         """
 
         self.cursor = self.db_connect.cursor()
-        sql = "INSERT INTO Category (category_id, name) VALUES (%s, %s)"
+        self.cursor.execute("USE `database`;")
+        sql = "INSERT INTO Category (category_id, name) VALUES (%s, %s);"
         val = (self.cursor.lastrowid, p_category_name)
         self.cursor.execute(sql, val)
 
@@ -118,7 +119,7 @@ class MySQL:
 
         self.cursor = self.db_connect.cursor()
         sql = "INSERT INTO Food (food_id, cat_id, food_name, food_url, food_shop, food_nutrition)\
-         VALUES (%s, %s, %s, %s, %s, %s)"
+         VALUES (%s, %s, %s, %s, %s, %s);"
         val = (self.cursor.lastrowid, p_category, p_product_name, p_product_url, p_product_shop, p_product_nutrition)
         self.cursor.execute(sql, val)
 
@@ -131,6 +132,7 @@ class MySQL:
         We select the category_id column from the Category table
         to retrieve the database information.
         """
+        self.cursor = self.db_connect.cursor()
 
         select_category = "SELECT category_id, name FROM Category;"
 
