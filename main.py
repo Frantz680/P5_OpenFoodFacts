@@ -4,6 +4,7 @@ Application "Pur Beurre" for healthier eating.
 
 from api import Api
 from database import MySQL
+from display import Display
 
 """
 Import different class.
@@ -29,6 +30,8 @@ class Main:
         self.api_open_food_fact.request_category()
         self.api_open_food_fact.request_food()
 
+        self.display_open_food_fact = Display()
+
     def interraction_user(self):
         """
         This method allows you to search for the products to substitutes
@@ -39,29 +42,24 @@ class Main:
 
         while choice_menu:
 
-            choice = input(
-                "\n#### MENU ####\n\n"
-                "Press 1 for research substituted.\n"
-                "Press 2 for my substituted foods.\n"
-                "Press 3 for exit.\n"
-            )
+            choice = input(self.display_open_food_fact.menu())
 
             if choice == "1":
-                print("#### The categories ####\n")
+                self.display_open_food_fact.category()
                 self.database.select_category()
 
                 # (input(),) to make a tuple
-                choice_category = (input("\nTap the category number.\n"),)
-                print("\n#### The products ####\n")
+                choice_category = (input(self.display_open_food_fact.choice_category()),)
+                self.display_open_food_fact.product()
                 self.database.select_cat_food(choice_category)
 
-                choice_product = (input("\nTap the product number.\n"),)
+                choice_product = (input(self.display_open_food_fact.choice_product()),)
                 self.database.select_food(choice_product)
 
-                print("\nThe suggested substitute for this product is :")
+                self.display_open_food_fact.suggested_substitute()
                 self.database.select_substitue(choice_category)
 
-                saved = input("\nDo you want to save overrides ?\nPress 1 for yes.\nPress 2 for yes.\n")
+                saved = input(self.display_open_food_fact.substitute_saved())
 
                 if saved == "1":
                     self.database.insert_substitute_save()
@@ -69,7 +67,7 @@ class Main:
                 elif saved == "2":
                     pass
                 else:
-                    print("Please enter a number between 1-2.\nThank you.\n")
+                    self.display_open_food_fact.suggested_substitute_error()
 
             elif choice == "2":
                 self.my_substituted()
@@ -79,7 +77,7 @@ class Main:
                 choice_menu = 0
 
             else:
-                print("Please enter a number between 1-3.\nThank you.")
+                self.display_open_food_fact.menu_error()
 
     def my_substituted(self):
         """
@@ -90,33 +88,28 @@ class Main:
 
         while substituted:
 
-            choice = input(
-                "\n#### FAVORED SUBSTITUTES ####\n\n"
-                "Press 1 to see favored substitutes.\n"
-                "Press 2 to remove substitutes.\n"
-                "Press 3 to return to the menu.\n"
-            )
+            choice = input(self.display_open_food_fact.menu_favored())
 
             if choice == "1":
-                print("### Your substitutes save ###")
+                self.display_open_food_fact.favored_substitute()
                 self.database.select_substitute_save()
 
-                print("Select your substitute to see the information.\n")
-                choice_substituted = (input("\nTap the substitute number.\n"),)
+                self.display_open_food_fact.favored_information_substitute()
+                choice_substituted = (input(self.display_open_food_fact.choice_favored_substitute()),)
                 self.database.information_substitute_save(choice_substituted)
 
             elif choice == "2":
-                print("\nSelect the substitute to delete.\n")
+                self.display_open_food_fact.delete_substitute()
                 self.database.select_substitute_save()
 
-                choice_delete = (input("\nTap the substitute number.\n"),)
+                choice_delete = (input(self.display_open_food_fact.choice_delete_substitute()),)
                 self.database.delete_substitute(choice_delete)
 
             elif choice == "3":
                 self.interraction_user()
 
             else:
-                print("Please enter a number between 1-3.\nThank you.")
+                self.display_open_food_fact.menu_error()
 
 
 def main():

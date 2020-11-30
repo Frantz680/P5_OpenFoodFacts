@@ -45,7 +45,6 @@ class Api:
 
         print("\nLoading completed.")
 
-
     def request_food(self):
         """
         Get product information from Open Food Facts.
