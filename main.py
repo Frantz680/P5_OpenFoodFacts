@@ -38,9 +38,9 @@ class Main:
         choice_connection = 1
 
         while choice_connection:
-            choice_connec = self.display_open_food_fact.menu_connection()
+            choice = self.display_open_food_fact.menu_connection()
 
-            if choice_connec == "1":
+            if choice == "1":
                 self.database.create_database()
                 self.database.connecting_db()
                 self.api_open_food_fact.request_category()
@@ -48,12 +48,12 @@ class Main:
                 self.interaction_user()
                 break
 
-            elif choice_connec == "2":
+            elif choice == "2":
                 self.database.connecting_db()
                 self.interaction_user()
                 break
 
-            elif choice_connec == "3":
+            elif choice == "3":
                 choice_connection = 0
 
             else:
@@ -116,7 +116,7 @@ class Main:
                         self.display_open_food_fact.suggested_substitute_error()
 
             elif choice == "2":
-                self.favored_substitutes()
+                self.substitutes_save()
 
             elif choice == "3":
                 self.database.data_close()
@@ -125,7 +125,7 @@ class Main:
             else:
                 self.display_open_food_fact.menu_error()
 
-    def favored_substitutes(self):
+    def substitutes_save(self):
         """
         This method allows you to see the favorite substitutes and delete them.
         """

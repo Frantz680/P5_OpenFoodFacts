@@ -2,15 +2,15 @@
 The class is used for the API.
 """
 
-import time
 import requests
 import json
 
+from display import Display
 from database import MySQL
 from glob import Glob
 
 """
-Import from time, requests, json Library.
+Import from requests, json Library.
 
 Import different class.
 """
@@ -31,19 +31,21 @@ class Api:
         self.category_json = json.loads \
             (requests.get('https://fr.openfoodfacts.org/langue/francais/categories.json').text)
 
+        self.display_open_food_fact = Display()
+
     def request_category(self):
         """
         Get category names from Open Food Facts.
         """
 
-        print("Loading categories into the database.")
+        self.display_open_food_fact.loading_categories()
 
         for counter in range(Glob.nb_category):
             self.database.insert_data_category(self.category_json["tags"][counter]["name"])
-            print(".", end="")
-            time.sleep(0.009)
+            self.display_open_food_fact.loading_point_category()
 
-        print("\nLoading completed.")
+        self.display_open_food_fact.loading_completed_categories()
+
 
     def request_food(self):
         """
@@ -56,7 +58,7 @@ class Api:
         product_shop = ""
         product_nutrition = ""
 
-        print("Loading food into the database.")
+        self.display_open_food_fact.loading_food()
 
         for category in range(Glob.nb_category + 1):
             category_choice_json = self.category_json["tags"][category - 1]
@@ -92,7 +94,6 @@ class Api:
 
                 self.database.insert_data_product(category, product_name, product_url, product_shop, product_nutrition)
 
-            print(".", end="")
+            self.display_open_food_fact.loading_point_food()
 
-        print("\nLoading completed.")
-
+        self.display_open_food_fact.loading_completed_food()

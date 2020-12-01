@@ -4,6 +4,7 @@ The class is used to create the database.
 
 import mysql.connector
 
+from display import Display
 from glob import Glob
 
 """
@@ -24,6 +25,7 @@ class MySQL:
         """
         We build the constructor.
         """
+        self.display_open_food_fact = Display()
 
         self.host = Glob.host
         self.user = Glob.user
@@ -83,7 +85,7 @@ class MySQL:
                 substitute_nutrition CHAR(1),\
                 PRIMARY KEY (substitute_id));")
 
-        print("Creation of the database.")
+        self.display_open_food_fact.create_database()
 
     def connecting_db(self):
         """
@@ -95,7 +97,8 @@ class MySQL:
             password=self.password,
             database=self.database
         )
-        print("Connection to the database.")
+
+        self.display_open_food_fact.connection_database()
 
     def insert_data_category(self, p_category_name):
         """

@@ -2,6 +2,8 @@
 The class is used for display in the console.
 """
 
+import time
+
 
 class Display:
     """
@@ -124,3 +126,36 @@ class Display:
 
         choice = (int(input("\nTap the substitute number.\n")),)
         return choice
+
+    """
+    API
+    """
+
+    def loading_categories(self):
+        print("Loading categories into the database.")
+
+    def loading_point_category(self):
+        print(".", end="")
+        time.sleep(0.009)
+
+    def loading_completed_categories(self):
+        print("\nLoading completed.")
+
+    def loading_food(self):
+        print("Loading food into the database.")
+
+    def loading_point_food(self):
+        print(".", end="")
+
+    def loading_completed_food(self):
+        print("\nLoading completed.")
+
+    """
+    Database
+    """
+
+    def create_database(self):
+        print("Creation of the database.")
+
+    def connection_database(self):
+        print("Connection to the database.")
