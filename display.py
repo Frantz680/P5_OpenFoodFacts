@@ -11,6 +11,10 @@ class Display:
     def __init__(self):
         pass
 
+    """
+    MENU
+    """
+
     def menu_connection(self):
 
         print("\n#### MENU CONNECTION ####\n\n"
@@ -25,6 +29,23 @@ class Display:
               "Press 1 for research substituted.\n"
               "Press 2 for my substituted foods.\n"
               "Press 3 for exit.\n")
+
+    def menu_error(self):
+        """Error display of number entry for menu."""
+
+        print("Please enter a number between 1-3.\nThank you.")
+
+    def menu_favored(self):
+        """Menu favored."""
+
+        print("\n#### FAVORED SUBSTITUTES ####\n\n"
+              "Press 1 to see favored substitutes.\n"
+              "Press 2 to remove substitutes.\n"
+              "Press 3 to return to the menu.\n")
+
+    """
+    Category and product
+    """
 
     def category(self):
         """Display of categories."""
@@ -46,6 +67,14 @@ class Display:
 
         print("\nTap the product number.\n")
 
+    def choice_error(self):
+
+        print("\nAppuyez sur un nombre de la liste.\nThank you.")
+
+    """
+    The substitute
+    """
+
     def suggested_substitute(self):
         """Display of substitute product."""
 
@@ -60,19 +89,6 @@ class Display:
         """Error display of number entry for substitute."""
 
         print("Please enter a number between 1-2.\nThank you.\n")
-
-    def menu_error(self):
-        """Error display of number entry for menu."""
-
-        print("Please enter a number between 1-3.\nThank you.")
-
-    def menu_favored(self):
-        """Menu favored."""
-
-        print("\n#### FAVORED SUBSTITUTES ####\n\n"
-              "Press 1 to see favored substitutes.\n"
-              "Press 2 to remove substitutes.\n"
-              "Press 3 to return to the menu.\n")
 
     def favored_substitute(self):
         """Show substitutes save."""

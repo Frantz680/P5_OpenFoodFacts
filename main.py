@@ -5,6 +5,7 @@ Application "Pur Beurre" for healthier eating.
 from api import Api
 from database import MySQL
 from display import Display
+from glob import Glob
 
 """
 Import different class.
@@ -64,29 +65,50 @@ class Main:
             choice = input(self.display_open_food_fact.menu())
 
             if choice == "1":
+                while True:
 
-                # (input(),) to make a tuple
-                self.display_open_food_fact.category()
-                self.database.select_category()
-                choice_category = (input(self.display_open_food_fact.choice_category()),)
+                    self.display_open_food_fact.category()
+                    self.database.select_category()
 
-                self.display_open_food_fact.product()
-                self.database.select_cat_food(choice_category)
+                    try:
+                        choice_category = (int(input(self.display_open_food_fact.choice_category())),)
 
-                choice_product = (input(self.display_open_food_fact.choice_product()),)
-                self.database.select_food(choice_product)
-                self.display_open_food_fact.suggested_substitute()
-                self.database.select_substitue(choice_category)
+                        if choice_category[0] <= Glob.nb_category:
+                            print(choice_category[0])
+                            break
 
-                saved = input(self.display_open_food_fact.substitute_saved())
+                        else:
+                            print(choice_category[0])
+                            self.display_open_food_fact.choice_error()
 
-                if saved == "1":
-                    self.database.insert_substitute_save()
+                    except ValueError:
+                        self.display_open_food_fact.choice_error()
 
-                elif saved == "2":
-                    pass
-                else:
-                    self.display_open_food_fact.suggested_substitute_error()
+                while True:
+                    try:
+                        self.display_open_food_fact.product()
+                        self.database.select_cat_food(choice_category)
+                        choice_product = (int(input(self.display_open_food_fact.choice_product())),)
+                        self.database.select_food(choice_product)
+                        break
+
+                    except ValueError:
+                        self.display_open_food_fact.choice_error()
+
+                while True:
+
+                    self.display_open_food_fact.suggested_substitute()
+                    self.database.select_substitue(choice_category)
+                    saved = input(self.display_open_food_fact.substitute_saved())
+
+                    if saved == "1":
+                        self.database.insert_substitute_save()
+                        break
+
+                    elif saved == "2":
+                        break
+                    else:
+                        self.display_open_food_fact.suggested_substitute_error()
 
             elif choice == "2":
                 self.my_substituted()
