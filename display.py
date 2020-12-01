@@ -18,18 +18,20 @@ class Display:
     def menu_connection(self):
         """Menu connection."""
 
-        print("\n#### MENU CONNECTION ####\n\n"
+        choice = input("\n#### MENU CONNECTION ####\n\n"
               "Press 1 for create database.\n"
               "Press 2 to connect to the existing database.\n"
               "Press 3 for exit.\n")
+        return choice
 
     def menu(self):
         """Menu display."""
 
-        print("\n#### MENU ####\n\n"
+        choice = input("\n#### MENU ####\n\n"
               "Press 1 for research substituted.\n"
               "Press 2 for my substituted foods.\n"
               "Press 3 for exit.\n")
+        return choice
 
     def menu_error(self):
         """Error display of number entry for menu."""
@@ -39,10 +41,11 @@ class Display:
     def menu_favored(self):
         """Menu favored."""
 
-        print("\n#### FAVORED SUBSTITUTES ####\n\n"
+        choice = input("\n#### FAVORED SUBSTITUTES ####\n\n"
               "Press 1 to see favored substitutes.\n"
               "Press 2 to remove substitutes.\n"
               "Press 3 to return to the menu.\n")
+        return choice
 
     """
     Category and product
@@ -56,7 +59,8 @@ class Display:
     def choice_category(self):
         """Display choice of categories."""
 
-        print("\nTap the category number.\n")
+        choice = (int(input("\nTap the category number.\n")),)
+        return choice
 
     def product(self):
         """Display of products."""
@@ -66,7 +70,8 @@ class Display:
     def choice_product(self):
         """Display choice of products."""
 
-        print("\nTap the product number.\n")
+        choice = (int(input("\nTap the product number.\n")),)
+        return choice
 
     def choice_error(self):
         """Display choice error"""
@@ -85,7 +90,8 @@ class Display:
     def substitute_saved(self):
         """Display to record the replacement product."""
 
-        print("\nDo you want to save overrides ?\nPress 1 for yes.\nPress 2 for yes.\n")
+        choice = input("\nDo you want to save overrides ?\nPress 1 for yes.\nPress 2 for yes.\n")
+        return choice
 
     def suggested_substitute_error(self):
         """Error display of number entry for substitute."""
@@ -100,12 +106,13 @@ class Display:
     def favored_information_substitute(self):
         """Display substitute information select."""
 
-        print("Select your substitute to see the information.\n")
+        print("\nSelect your substitute to see the information.")
 
     def choice_favored_substitute(self):
         """Display choice of favored substitutes."""
 
-        print("\nTap the substitute number.\n")
+        choice = (int(input("\nTap the substitute number.\n")),)
+        return choice
 
     def delete_substitute(self):
         """Show substituted backups to delete."""
@@ -115,4 +122,5 @@ class Display:
     def choice_delete_substitute(self):
         """Display the choice of substitutes to delete."""
 
-        print("\nTap the substitute number.\n")
+        choice = (int(input("\nTap the substitute number.\n")),)
+        return choice

@@ -38,7 +38,7 @@ class Main:
         choice_connection = 1
 
         while choice_connection:
-            choice_connec = input(self.display_open_food_fact.menu_connection())
+            choice_connec = self.display_open_food_fact.menu_connection()
 
             if choice_connec == "1":
                 self.database.create_database()
@@ -69,7 +69,7 @@ class Main:
 
         while choice_menu:
 
-            choice = input(self.display_open_food_fact.menu())
+            choice = self.display_open_food_fact.menu()
 
             if choice == "1":
                 while True:
@@ -78,14 +78,12 @@ class Main:
                     self.database.select_category()
 
                     try:
-                        choice_category = (int(input(self.display_open_food_fact.choice_category())),)
+                        choice_category = self.display_open_food_fact.choice_category()
 
                         if choice_category[0] <= Glob.nb_category:
-                            print(choice_category[0])
                             break
 
                         else:
-                            print(choice_category[0])
                             self.display_open_food_fact.choice_error()
 
                     except ValueError:
@@ -95,7 +93,7 @@ class Main:
                     try:
                         self.display_open_food_fact.product()
                         self.database.select_cat_food(choice_category)
-                        choice_product = (int(input(self.display_open_food_fact.choice_product())),)
+                        choice_product = self.display_open_food_fact.choice_product()
                         self.database.select_food(choice_product)
                         break
 
@@ -106,7 +104,7 @@ class Main:
 
                     self.display_open_food_fact.suggested_substitute()
                     self.database.select_substitue(choice_category)
-                    saved = input(self.display_open_food_fact.substitute_saved())
+                    saved = self.display_open_food_fact.substitute_saved()
 
                     if saved == "1":
                         self.database.insert_substitute_save()
@@ -122,7 +120,7 @@ class Main:
 
             elif choice == "3":
                 self.database.data_close()
-                break
+                choice_menu = 0
 
             else:
                 self.display_open_food_fact.menu_error()
@@ -136,7 +134,7 @@ class Main:
 
         while substituted:
 
-            choice = input(self.display_open_food_fact.menu_favored())
+            choice = self.display_open_food_fact.menu_favored()
 
             if choice == "1":
                 self.display_open_food_fact.favored_substitute()
@@ -145,7 +143,7 @@ class Main:
                     try:
                         self.database.select_substitute_save()
                         self.display_open_food_fact.favored_information_substitute()
-                        choice_substituted = (int(input(self.display_open_food_fact.choice_favored_substitute())),)
+                        choice_substituted = self.display_open_food_fact.choice_favored_substitute()
                         self.database.information_substitute_save(choice_substituted)
                         break
 
@@ -157,7 +155,7 @@ class Main:
                     try:
                         self.display_open_food_fact.delete_substitute()
                         self.database.select_substitute_save()
-                        choice_delete = (int(input(self.display_open_food_fact.choice_delete_substitute())),)
+                        choice_delete = self.display_open_food_fact.choice_delete_substitute()
                         self.database.delete_substitute(choice_delete)
                         break
 
