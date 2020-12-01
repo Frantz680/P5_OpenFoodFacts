@@ -30,6 +30,10 @@ class Main:
         self.display_open_food_fact = Display()
 
     def interaction_user_connect(self):
+        """
+        This method allows you to create
+        the database or to connect it.
+        """
 
         choice_connection = 1
 

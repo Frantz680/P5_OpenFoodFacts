@@ -69,8 +69,9 @@ class Display:
         print("\nTap the product number.\n")
 
     def choice_error(self):
+        """Display choice error"""
 
-        print("\nAppuyez sur un nombre de la liste.\nThank you.")
+        print("\nTap a number from the list.\nThank you.")
 
     """
     The substitute

@@ -9,7 +9,7 @@ from glob import Glob
 """
 Import from mysql.connector Library.
 
-Import different variables.
+Import different Class.
 """
 
 

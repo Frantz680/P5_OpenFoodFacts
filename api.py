@@ -58,7 +58,7 @@ class Api:
 
         print("Loading food into the database.")
 
-        for category in range(Glob.nb_category):
+        for category in range(Glob.nb_category + 1):
             category_choice_json = self.category_json["tags"][category - 1]
             "print(category_choisi_json)"
 
