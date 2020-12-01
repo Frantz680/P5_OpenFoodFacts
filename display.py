@@ -8,13 +8,23 @@ class Display:
     This class is used for displaying the application in the console.
     """
 
+    def __init__(self):
+        pass
+
+    def menu_connection(self):
+
+        print("\n#### MENU CONNECTION ####\n\n"
+              "Press 1 for create database.\n"
+              "Press 2 to connect to the existing database.\n"
+              "Press 3 for exit.\n")
+
     def menu(self):
         """Menu display."""
 
         print("\n#### MENU ####\n\n"
-        "Press 1 for research substituted.\n"
-        "Press 2 for my substituted foods.\n"
-        "Press 3 for exit.\n")
+              "Press 1 for research substituted.\n"
+              "Press 2 for my substituted foods.\n"
+              "Press 3 for exit.\n")
 
     def category(self):
         """Display of categories."""

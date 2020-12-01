@@ -23,12 +23,8 @@ class Main:
         """
 
         self.database = MySQL()
-        self.database.create_database()
-        self.database.connecting_db()
 
         self.api_open_food_fact = Api()
-        self.api_open_food_fact.request_category()
-        self.api_open_food_fact.request_food()
 
         self.display_open_food_fact = Display()
 
@@ -38,24 +34,47 @@ class Main:
         and the preferred substitutes.
         """
 
-        choice_menu = 1
+        choice_menu = 0
+        choice_connection = 1
+
+        while choice_connection:
+            choice_connec = input(self.display_open_food_fact.menu_connection())
+
+            if choice_connec == "1":
+                self.database.create_database()
+                self.database.connecting_db()
+                self.api_open_food_fact.request_category()
+                self.api_open_food_fact.request_food()
+                choice_menu = 1
+                break
+
+            elif choice_connec == "2":
+                self.database.connecting_db()
+                choice_menu = 1
+                break
+
+            elif choice_connec == "3":
+                choice_connection = 0
+
+            else:
+                self.display_open_food_fact.menu_error()
 
         while choice_menu:
 
             choice = input(self.display_open_food_fact.menu())
 
             if choice == "1":
-                self.display_open_food_fact.category()
-                self.database.select_category()
 
                 # (input(),) to make a tuple
+                self.display_open_food_fact.category()
+                self.database.select_category()
                 choice_category = (input(self.display_open_food_fact.choice_category()),)
+
                 self.display_open_food_fact.product()
                 self.database.select_cat_food(choice_category)
 
                 choice_product = (input(self.display_open_food_fact.choice_product()),)
                 self.database.select_food(choice_product)
-
                 self.display_open_food_fact.suggested_substitute()
                 self.database.select_substitue(choice_category)
 

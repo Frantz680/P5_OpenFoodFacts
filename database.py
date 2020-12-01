@@ -118,6 +118,7 @@ class MySQL:
         """
 
         self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         sql = "INSERT INTO Food (food_id, cat_id, food_name, food_url, food_shop, food_nutrition)\
          VALUES (%s, %s, %s, %s, %s, %s);"
         val = (self.cursor.lastrowid, p_category, p_product_name, p_product_url, p_product_shop, p_product_nutrition)
@@ -132,8 +133,9 @@ class MySQL:
         We select the category_id column from the Category table
         to retrieve the database information.
         """
-        self.cursor = self.db_connect.cursor()
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         select_category = "SELECT category_id, name FROM Category;"
 
         self.cursor.execute(select_category)
@@ -147,6 +149,8 @@ class MySQL:
         between two tables.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         select_cat_food = 'SELECT food_id, food_name FROM Food\
         INNER JOIN Category\
         ON Category.category_id = Food.cat_id\
@@ -162,6 +166,8 @@ class MySQL:
         columns from the Food table.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         select_food = 'SELECT food_name, food_url, food_shop, food_nutrition FROM Food\
         WHERE Food.food_id = %s;'
 
@@ -177,6 +183,8 @@ class MySQL:
         between two tables.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         id_substitue = "1"
         # 102 ==  The letter "f" in ASCII
         nutri_substitue = 102
@@ -209,6 +217,7 @@ class MySQL:
         """
 
         self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         sql = "INSERT INTO Substitute (substitute_id, substitute_name, substitute_url, substitute_shop, substitute_nutrition)\
                  VALUES (%s, %s, %s, %s, %s)"
         val = (self.cursor.lastrowid, self.food_name, self.food_url, self.food_shop, self.food_nutrition)
@@ -221,6 +230,8 @@ class MySQL:
         In this method, we save the selected substitutes.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         select_substitute_save = 'SELECT substitute_id, substitute_name FROM Substitute'
         self.cursor.execute(select_substitute_save)
         for self.substitute_id, self.substitute_name in self.cursor:
@@ -231,6 +242,8 @@ class MySQL:
         In this method, we display the information of the substitutes.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         information_substitute_save = 'SELECT substitute_name,\
         substitute_url, substitute_shop, substitute_nutrition FROM Substitute\
         WHERE Substitute.substitute_id = %s;'
@@ -244,6 +257,8 @@ class MySQL:
         In this method, we remove the substitutes save.
         """
 
+        self.cursor = self.db_connect.cursor()
+        self.cursor.execute("USE `database`;")
         delete_substitute = 'DELETE FROM Substitute\
          WHERE Substitute.substitute_id = %s;'
 
