@@ -262,16 +262,14 @@ class MySQL:
         delete_substitute = 'DELETE FROM Substitute\
          WHERE Substitute.substitute_id = %s;'
 
-        # Convert a tuple to str
-        str_choice_delete = ''.join(p_choice_delete)
-
         self.cursor.execute(delete_substitute, p_choice_delete)
-        print("You have deleted the substitute number: :" + str_choice_delete)
+        print("You have deleted the substitute number: :" + str(p_choice_delete[0]))
 
     def data_close(self):
         """
         In this method, we close the database.
         """
 
-        self.cursor.close()
+        self.cursor = self.db_connect.cursor()
         self.db_connect.commit()
+        self.cursor.close()

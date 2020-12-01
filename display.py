@@ -16,6 +16,7 @@ class Display:
     """
 
     def menu_connection(self):
+        """Menu connection."""
 
         print("\n#### MENU CONNECTION ####\n\n"
               "Press 1 for create database.\n"
@@ -93,7 +94,7 @@ class Display:
     def favored_substitute(self):
         """Show substitutes save."""
 
-        print("### Your substitutes save ###")
+        print("\n### Your substitutes save ###\n")
 
     def favored_information_substitute(self):
         """Display substitute information select."""

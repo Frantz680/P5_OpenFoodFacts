@@ -29,13 +29,8 @@ class Main:
 
         self.display_open_food_fact = Display()
 
-    def interraction_user(self):
-        """
-        This method allows you to search for the products to substitutes
-        and the preferred substitutes.
-        """
+    def interaction_user_connect(self):
 
-        choice_menu = 0
         choice_connection = 1
 
         while choice_connection:
@@ -46,12 +41,12 @@ class Main:
                 self.database.connecting_db()
                 self.api_open_food_fact.request_category()
                 self.api_open_food_fact.request_food()
-                choice_menu = 1
+                self.interaction_user()
                 break
 
             elif choice_connec == "2":
                 self.database.connecting_db()
-                choice_menu = 1
+                self.interaction_user()
                 break
 
             elif choice_connec == "3":
@@ -59,6 +54,14 @@ class Main:
 
             else:
                 self.display_open_food_fact.menu_error()
+
+    def interaction_user(self):
+        """
+        This method allows you to search for the products to substitutes
+        and the preferred substitutes.
+        """
+
+        choice_menu = 1
 
         while choice_menu:
 
@@ -111,16 +114,16 @@ class Main:
                         self.display_open_food_fact.suggested_substitute_error()
 
             elif choice == "2":
-                self.my_substituted()
+                self.favored_substitutes()
 
             elif choice == "3":
                 self.database.data_close()
-                choice_menu = 0
+                break
 
             else:
                 self.display_open_food_fact.menu_error()
 
-    def my_substituted(self):
+    def favored_substitutes(self):
         """
         This method allows you to see the favorite substitutes and delete them.
         """
@@ -133,21 +136,33 @@ class Main:
 
             if choice == "1":
                 self.display_open_food_fact.favored_substitute()
-                self.database.select_substitute_save()
 
-                self.display_open_food_fact.favored_information_substitute()
-                choice_substituted = (input(self.display_open_food_fact.choice_favored_substitute()),)
-                self.database.information_substitute_save(choice_substituted)
+                while True:
+                    try:
+                        self.database.select_substitute_save()
+                        self.display_open_food_fact.favored_information_substitute()
+                        choice_substituted = (int(input(self.display_open_food_fact.choice_favored_substitute())),)
+                        self.database.information_substitute_save(choice_substituted)
+                        break
+
+                    except ValueError:
+                        self.display_open_food_fact.choice_error()
 
             elif choice == "2":
-                self.display_open_food_fact.delete_substitute()
-                self.database.select_substitute_save()
+                while True:
+                    try:
+                        self.display_open_food_fact.delete_substitute()
+                        self.database.select_substitute_save()
+                        choice_delete = (int(input(self.display_open_food_fact.choice_delete_substitute())),)
+                        self.database.delete_substitute(choice_delete)
+                        break
 
-                choice_delete = (input(self.display_open_food_fact.choice_delete_substitute()),)
-                self.database.delete_substitute(choice_delete)
+                    except ValueError:
+                        self.display_open_food_fact.choice_error()
 
             elif choice == "3":
-                self.interraction_user()
+                substituted = 0
+                self.interaction_user()
 
             else:
                 self.display_open_food_fact.menu_error()
@@ -159,7 +174,7 @@ def main():
     """
 
     user = Main()
-    user.interraction_user()
+    user.interaction_user_connect()
 
 
 """
