@@ -5,8 +5,8 @@ The class is used for the API.
 import requests
 import json
 
-from display import Display
-from database import MySQL
+from Display.display import Display
+from Database.database import MySQL
 from glob import Glob
 
 """
@@ -24,7 +24,7 @@ class Api:
 
     def __init__(self):
         """
-        We build the constructor.
+        We build the instance of the class.
         """
         self.database = MySQL()
 

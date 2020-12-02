@@ -4,7 +4,7 @@ The class is used to create the database.
 
 import mysql.connector
 
-from display import Display
+from Display.display import Display
 from glob import Glob
 
 """
@@ -23,7 +23,7 @@ class MySQL:
 
     def __init__(self):
         """
-        We build the constructor.
+        We build the instance of the class.
         """
         self.display_open_food_fact = Display()
 
@@ -142,8 +142,8 @@ class MySQL:
         select_category = "SELECT category_id, name FROM Category;"
 
         self.cursor.execute(select_category)
-        for self.category_id, name in self.cursor:
-            print(str(self.category_id) + "->" + str(name))
+        for self.category_id, self.name in self.cursor:
+            self.display_open_food_fact.select_category_db(self.category_id, self.name)
 
     def select_cat_food(self, p_choice_category):
         """
@@ -161,7 +161,7 @@ class MySQL:
 
         self.cursor.execute(select_cat_food, p_choice_category)
         for self.food_id, self.food_name in self.cursor:
-            print(str(self.food_id) + "->" + str(self.food_name))
+            self.display_open_food_fact.select_cat_food_db(self.food_id, self.food_name)
 
     def select_food(self, p_choice_product):
         """
@@ -176,8 +176,7 @@ class MySQL:
 
         self.cursor.execute(select_food, p_choice_product)
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
-            print("The product you have selected is:")
-            print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
+            self.display_open_food_fact.select_food_db(self.food_name, self.food_url, self.food_shop, self.food_nutrition)
 
     def select_substitue(self, p_choice_category):
         """
@@ -212,7 +211,7 @@ class MySQL:
 
         self.cursor.execute(select_substitue, (int(id_substitue),))
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
-            print("\nNAME->" + str(self.food_name) + "\nURL->" + str(self.food_url) + "\nSHOP->" + str(self.food_shop) + "\nNUTRI->" + str(self.food_nutrition))
+            self.display_open_food_fact.select_substitue_db(self.food_name, self.food_url, self.food_shop, self.food_nutrition)
 
     def insert_substitute_save(self):
         """
@@ -238,7 +237,7 @@ class MySQL:
         select_substitute_save = 'SELECT substitute_id, substitute_name FROM Substitute'
         self.cursor.execute(select_substitute_save)
         for self.substitute_id, self.substitute_name in self.cursor:
-            print(str(self.substitute_id) + "->" + str(self.substitute_name))
+            self.display_open_food_fact.select_substitute_save_db(self.substitute_id, self.substitute_name)
 
     def information_substitute_save(self, p_choice_substituted):
         """
@@ -253,7 +252,7 @@ class MySQL:
 
         self.cursor.execute(information_substitute_save, p_choice_substituted)
         for self.substitute_name, self.substitute_url, self.substitute_shop, self.substitute_nutrition in self.cursor:
-            print("\nNAME->" + str(self.substitute_name) + "\nURL->" + str(self.substitute_url) + "\nSHOP->" + str(self.substitute_shop) + "\nNUTRI->" + str(self.substitute_nutrition))
+            self.display_open_food_fact.information_substitute_save_db(self.substitute_name, self.substitute_url, self.substitute_shop, self.substitute_nutrition)
 
     def delete_substitute(self, p_choice_delete):
         """
@@ -266,7 +265,7 @@ class MySQL:
          WHERE Substitute.substitute_id = %s;'
 
         self.cursor.execute(delete_substitute, p_choice_delete)
-        print("You have deleted the substitute number: :" + str(p_choice_delete[0]))
+        self.display_open_food_fact.delete_substitute_db(p_choice_delete)
 
     def data_close(self):
         """

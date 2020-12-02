@@ -11,6 +11,10 @@ class Display:
     """
 
     def __init__(self):
+        """
+        We build the instance of the class.
+        """
+
         pass
 
     """
@@ -159,3 +163,28 @@ class Display:
 
     def connection_database(self):
         print("Connection to the database.")
+
+    def select_category_db(self, p_category_id, p_name):
+        print(str(p_category_id) + "->" + str(p_name))
+
+    def select_cat_food_db(self, p_food_id, p_food_name):
+        print(str(p_food_id) + "->" + str(p_food_name))
+
+    def select_food_db(self, p_food_name, p_food_url, p_food_shop, p_food_nutrition):
+        print("The product you have selected is:")
+        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url) + "\nSHOP->" + str(
+            p_food_shop) + "\nNUTRI->" + str(p_food_nutrition))
+
+    def select_substitue_db(self, p_food_name, p_food_url, p_food_shop, p_food_nutrition):
+        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url) + "\nSHOP->" + str(
+            p_food_shop) + "\nNUTRI->" + str(p_food_nutrition))
+
+    def select_substitute_save_db(self, p_substitute_id, p_substitute_name):
+        print(str(p_substitute_id) + "->" + str(p_substitute_name))
+
+    def information_substitute_save_db(self, p_substitute_name, p_substitute_url, p_substitute_shop, p_substitute_nutrition):
+        print("\nNAME->" + str(p_substitute_name) + "\nURL->" + str(p_substitute_url) + "\nSHOP->" + str(
+            p_substitute_shop) + "\nNUTRI->" + str(p_substitute_nutrition))
+
+    def delete_substitute_db(self, p_choice_delete):
+        print("You have deleted the substitute number: " + str(p_choice_delete[0]))

@@ -2,9 +2,9 @@
 Application "Pur Beurre" for healthier eating.
 """
 
-from api import Api
-from database import MySQL
-from display import Display
+from API.api import Api
+from Database.database import MySQL
+from Display.display import Display
 from glob import Glob
 
 """
@@ -20,7 +20,7 @@ class Main:
 
     def __init__(self):
         """
-        We build the constructor.
+        We build the instance of the class.
         """
 
         self.database = MySQL()
@@ -72,7 +72,13 @@ class Main:
             choice = self.display_open_food_fact.menu()
 
             if choice == "1":
+
+                """Infinite loops are for repeating
+                 the question in case of character that
+                 is not a number."""
+
                 while True:
+                    """Loop for category choice."""
 
                     self.display_open_food_fact.category()
                     self.database.select_category()
@@ -90,6 +96,8 @@ class Main:
                         self.display_open_food_fact.choice_error()
 
                 while True:
+                    """Loop for product choice."""
+
                     try:
                         self.display_open_food_fact.product()
                         self.database.select_cat_food(choice_category)
@@ -101,6 +109,7 @@ class Main:
                         self.display_open_food_fact.choice_error()
 
                 while True:
+                    """Loop of the proposal of the substitute and the saving of this one."""
 
                     self.display_open_food_fact.suggested_substitute()
                     self.database.select_substitue(choice_category)
@@ -137,9 +146,16 @@ class Main:
             choice = self.display_open_food_fact.menu_favored()
 
             if choice == "1":
+
+                """Infinite loops are for repeating
+                 the question in case of character that
+                 is not a number."""
+
                 self.display_open_food_fact.favored_substitute()
 
                 while True:
+                    """Loop to see the substitutes save."""
+
                     try:
                         self.database.select_substitute_save()
                         self.display_open_food_fact.favored_information_substitute()
@@ -151,7 +167,10 @@ class Main:
                         self.display_open_food_fact.choice_error()
 
             elif choice == "2":
+
                 while True:
+                    """Loop to remove substituted backup."""
+
                     try:
                         self.display_open_food_fact.delete_substitute()
                         self.database.select_substitute_save()
