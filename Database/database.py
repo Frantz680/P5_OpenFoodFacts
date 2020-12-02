@@ -115,16 +115,21 @@ class MySQL:
 
         """print(self.cursor.rowcount, "record inserted.")"""
 
-    def insert_data_product(self, p_category, p_product_name, p_product_url, p_product_shop, p_product_nutrition):
+    def insert_data_product(
+            self, p_category, p_product_name, p_product_url,
+            p_product_shop, p_product_nutrition):
         """
         Insertion of product information into the database.
         """
 
         self.cursor = self.db_connect.cursor()
         self.cursor.execute("USE `database`;")
-        sql = "INSERT INTO Food (food_id, cat_id, food_name, food_url, food_shop, food_nutrition)\
+        sql = "INSERT INTO Food\
+         (food_id, cat_id, food_name, food_url, food_shop, food_nutrition)\
          VALUES (%s, %s, %s, %s, %s, %s);"
-        val = (self.cursor.lastrowid, p_category, p_product_name, p_product_url, p_product_shop, p_product_nutrition)
+        val = (
+            self.cursor.lastrowid, p_category, p_product_name,
+            p_product_url, p_product_shop, p_product_nutrition)
         self.cursor.execute(sql, val)
 
         self.db_connect.commit()
@@ -143,7 +148,8 @@ class MySQL:
 
         self.cursor.execute(select_category)
         for self.category_id, self.name in self.cursor:
-            self.display_open_food_fact.select_category_db(self.category_id, self.name)
+            self.display_open_food_fact.select_category_db(
+                self.category_id, self.name)
 
     def select_cat_food(self, p_choice_category):
         """
@@ -161,7 +167,8 @@ class MySQL:
 
         self.cursor.execute(select_cat_food, p_choice_category)
         for self.food_id, self.food_name in self.cursor:
-            self.display_open_food_fact.select_cat_food_db(self.food_id, self.food_name)
+            self.display_open_food_fact.select_cat_food_db(
+                self.food_id, self.food_name)
 
     def select_food(self, p_choice_product):
         """
@@ -175,8 +182,11 @@ class MySQL:
         WHERE Food.food_id = %s;'
 
         self.cursor.execute(select_food, p_choice_product)
-        for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
-            self.display_open_food_fact.select_food_db(self.food_name, self.food_url, self.food_shop, self.food_nutrition)
+        for self.food_name, self.food_url, self.food_shop, self.food_nutrition\
+                in self.cursor:
+            self.display_open_food_fact.select_food_db(
+                self.food_name, self.food_url,
+                self.food_shop, self.food_nutrition)
 
     def select_substitue(self, p_choice_category):
         """
@@ -200,7 +210,8 @@ class MySQL:
             "print(self.food_id, ord(self.food_nutrition))"
             for increment in range(5):
                 """print("increment" + str(increment + 97))"""
-                if ord(self.food_nutrition) <= increment + 97 and ord(self.food_nutrition) < nutri_substitue:
+                if ord(self.food_nutrition) <= increment + 97 and\
+                        ord(self.food_nutrition) < nutri_substitue:
                     id_substitue = self.food_id
                     nutri_substitue = ord(self.food_nutrition)
 
@@ -210,8 +221,11 @@ class MySQL:
                 WHERE Food.food_id = %s;'
 
         self.cursor.execute(select_substitue, (int(id_substitue),))
-        for self.food_name, self.food_url, self.food_shop, self.food_nutrition in self.cursor:
-            self.display_open_food_fact.select_substitue_db(self.food_name, self.food_url, self.food_shop, self.food_nutrition)
+        for self.food_name, self.food_url, self.food_shop, self.food_nutrition\
+                in self.cursor:
+            self.display_open_food_fact.select_substitue_db(
+                self.food_name, self.food_url,
+                self.food_shop, self.food_nutrition)
 
     def insert_substitute_save(self):
         """
@@ -220,9 +234,13 @@ class MySQL:
 
         self.cursor = self.db_connect.cursor()
         self.cursor.execute("USE `database`;")
-        sql = "INSERT INTO Substitute (substitute_id, substitute_name, substitute_url, substitute_shop, substitute_nutrition)\
+        sql = "INSERT INTO Substitute " \
+              "(substitute_id, substitute_name, substitute_url," \
+              " substitute_shop, substitute_nutrition)\
                  VALUES (%s, %s, %s, %s, %s)"
-        val = (self.cursor.lastrowid, self.food_name, self.food_url, self.food_shop, self.food_nutrition)
+        val = (
+            self.cursor.lastrowid, self.food_name,
+            self.food_url, self.food_shop, self.food_nutrition)
         self.cursor.execute(sql, val)
 
         self.db_connect.commit()
@@ -234,10 +252,12 @@ class MySQL:
 
         self.cursor = self.db_connect.cursor()
         self.cursor.execute("USE `database`;")
-        select_substitute_save = 'SELECT substitute_id, substitute_name FROM Substitute'
+        select_substitute_save =\
+            'SELECT substitute_id, substitute_name FROM Substitute'
         self.cursor.execute(select_substitute_save)
         for self.substitute_id, self.substitute_name in self.cursor:
-            self.display_open_food_fact.select_substitute_save_db(self.substitute_id, self.substitute_name)
+            self.display_open_food_fact.select_substitute_save_db(
+                self.substitute_id, self.substitute_name)
 
     def information_substitute_save(self, p_choice_substituted):
         """
@@ -251,8 +271,12 @@ class MySQL:
         WHERE Substitute.substitute_id = %s;'
 
         self.cursor.execute(information_substitute_save, p_choice_substituted)
-        for self.substitute_name, self.substitute_url, self.substitute_shop, self.substitute_nutrition in self.cursor:
-            self.display_open_food_fact.information_substitute_save_db(self.substitute_name, self.substitute_url, self.substitute_shop, self.substitute_nutrition)
+        for self.substitute_name, self.substitute_url, \
+            self.substitute_shop, self.substitute_nutrition\
+                in self.cursor:
+            self.display_open_food_fact.information_substitute_save_db(
+                self.substitute_name, self.substitute_url,
+                self.substitute_shop, self.substitute_nutrition)
 
     def delete_substitute(self, p_choice_delete):
         """

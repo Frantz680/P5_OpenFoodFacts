@@ -25,18 +25,18 @@ class Display:
         """Menu connection."""
 
         choice = input("\n#### MENU CONNECTION ####\n\n"
-              "Press 1 for create database.\n"
-              "Press 2 to connect to the existing database.\n"
-              "Press 3 for exit.\n")
+                       "Press 1 for create database.\n"
+                       "Press 2 to connect to the existing database.\n"
+                       "Press 3 for exit.\n")
         return choice
 
     def menu(self):
         """Menu display."""
 
         choice = input("\n#### MENU ####\n\n"
-              "Press 1 for research substituted.\n"
-              "Press 2 for my substituted foods.\n"
-              "Press 3 for exit.\n")
+                       "Press 1 for research substituted.\n"
+                       "Press 2 for my substituted foods.\n"
+                       "Press 3 for exit.\n")
         return choice
 
     def menu_error(self):
@@ -48,9 +48,9 @@ class Display:
         """Menu favored."""
 
         choice = input("\n#### FAVORED SUBSTITUTES ####\n\n"
-              "Press 1 to see favored substitutes.\n"
-              "Press 2 to remove substitutes.\n"
-              "Press 3 to return to the menu.\n")
+                       "Press 1 to see favored substitutes.\n"
+                       "Press 2 to remove substitutes.\n"
+                       "Press 3 to return to the menu.\n")
         return choice
 
     """
@@ -96,7 +96,8 @@ class Display:
     def substitute_saved(self):
         """Display to record the replacement product."""
 
-        choice = input("\nDo you want to save overrides ?\nPress 1 for yes.\nPress 2 for yes.\n")
+        choice = input("\nDo you want to save overrides ?"
+                       "\nPress 1 for yes.\nPress 2 for yes.\n")
         return choice
 
     def suggested_substitute_error(self):
@@ -170,21 +171,30 @@ class Display:
     def select_cat_food_db(self, p_food_id, p_food_name):
         print(str(p_food_id) + "->" + str(p_food_name))
 
-    def select_food_db(self, p_food_name, p_food_url, p_food_shop, p_food_nutrition):
+    def select_food_db(
+            self, p_food_name, p_food_url,
+            p_food_shop, p_food_nutri):
         print("The product you have selected is:")
-        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url) + "\nSHOP->" + str(
-            p_food_shop) + "\nNUTRI->" + str(p_food_nutrition))
+        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url))
+        print("\nSHOP->" + str(p_food_shop) + "\nNUTRI->" + str(p_food_nutri))
 
-    def select_substitue_db(self, p_food_name, p_food_url, p_food_shop, p_food_nutrition):
-        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url) + "\nSHOP->" + str(
-            p_food_shop) + "\nNUTRI->" + str(p_food_nutrition))
+    def select_substitue_db(
+            self, p_food_name, p_food_url,
+            p_food_shop, p_food_nutri):
+        print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url))
+        print("\nSHOP->" + str(p_food_shop) + "\nNUTRI->" + str(p_food_nutri))
 
     def select_substitute_save_db(self, p_substitute_id, p_substitute_name):
         print(str(p_substitute_id) + "->" + str(p_substitute_name))
 
-    def information_substitute_save_db(self, p_substitute_name, p_substitute_url, p_substitute_shop, p_substitute_nutrition):
-        print("\nNAME->" + str(p_substitute_name) + "\nURL->" + str(p_substitute_url) + "\nSHOP->" + str(
-            p_substitute_shop) + "\nNUTRI->" + str(p_substitute_nutrition))
+    def information_substitute_save_db(
+            self, p_substitute_name, p_substitute_url,
+            p_substitute_shop, p_substitute_nutrition):
+        print("\nNAME->" + str(p_substitute_name)
+              + "\nURL->" + str(p_substitute_url))
+        print("\nSHOP->" + str(p_substitute_shop)
+              + "\nNUTRI->" + str(p_substitute_nutrition))
 
     def delete_substitute_db(self, p_choice_delete):
-        print("You have deleted the substitute number: " + str(p_choice_delete[0]))
+        print("You have deleted the substitute number: " +
+              str(p_choice_delete[0]))

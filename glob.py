@@ -14,5 +14,3 @@ class Glob:
     database = "database"
     file_database = "create_db.sql"
     nb_category = 50
-
-

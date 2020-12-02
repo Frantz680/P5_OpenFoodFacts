@@ -28,8 +28,10 @@ class Api:
         """
         self.database = MySQL()
 
-        self.category_json = json.loads \
-            (requests.get('https://fr.openfoodfacts.org/langue/francais/categories.json').text)
+        self.url = \
+            'https://fr.openfoodfacts.org/langue/francais/categories.json'
+
+        self.category_json = json.loads(requests.get(self.url).text)
 
         self.display_open_food_fact = Display()
 
@@ -41,11 +43,11 @@ class Api:
         self.display_open_food_fact.loading_categories()
 
         for counter in range(Glob.nb_category):
-            self.database.insert_data_category(self.category_json["tags"][counter]["name"])
+            self.database.insert_data_category(
+                self.category_json["tags"][counter]["name"])
             self.display_open_food_fact.loading_point_category()
 
         self.display_open_food_fact.loading_completed_categories()
-
 
     def request_food(self):
         """
@@ -64,13 +66,16 @@ class Api:
             category_choice_json = self.category_json["tags"][category - 1]
             "print(category_choisi_json)"
 
-            answer_category_json = json.loads(requests.get(category_choice_json["url"] + ".json").text)
+            answer_category_json = json.loads(
+                requests.get(category_choice_json["url"] + ".json").text)
             "print(answer_category_json)"
 
             for product in answer_category_json["products"]:
                 "emplacement += 1"
 
-                """print(produit["product_name"] + " -> " + str(emplacement))"""
+                """print(produit["product_name"]
+                 + " -> " + str(emplacement))
+                 """
 
                 try:
                     product_name = product["product_name"]
@@ -92,7 +97,9 @@ class Api:
                 except KeyError:
                     pass
 
-                self.database.insert_data_product(category, product_name, product_url, product_shop, product_nutrition)
+                self.database.insert_data_product(
+                    category, product_name,
+                    product_url, product_shop, product_nutrition)
 
             self.display_open_food_fact.loading_point_food()
 

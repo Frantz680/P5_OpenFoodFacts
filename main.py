@@ -84,7 +84,8 @@ class Main:
                     self.database.select_category()
 
                     try:
-                        choice_category = self.display_open_food_fact.choice_category()
+                        choice_category = \
+                            self.display_open_food_fact.choice_category()
 
                         if choice_category[0] <= Glob.nb_category:
                             break
@@ -101,7 +102,8 @@ class Main:
                     try:
                         self.display_open_food_fact.product()
                         self.database.select_cat_food(choice_category)
-                        choice_product = self.display_open_food_fact.choice_product()
+                        choice_product = self.\
+                            display_open_food_fact.choice_product()
                         self.database.select_food(choice_product)
                         break
 
@@ -109,7 +111,8 @@ class Main:
                         self.display_open_food_fact.choice_error()
 
                 while True:
-                    """Loop of the proposal of the substitute and the saving of this one."""
+                    """Loop of the proposal of the
+                     substitute and the saving of this one."""
 
                     self.display_open_food_fact.suggested_substitute()
                     self.database.select_substitue(choice_category)
@@ -122,7 +125,8 @@ class Main:
                     elif saved == "2":
                         break
                     else:
-                        self.display_open_food_fact.suggested_substitute_error()
+                        self.display_open_food_fact\
+                            .suggested_substitute_error()
 
             elif choice == "2":
                 self.substitutes_save()
@@ -157,10 +161,14 @@ class Main:
                     """Loop to see the substitutes save."""
 
                     try:
-                        self.database.select_substitute_save()
-                        self.display_open_food_fact.favored_information_substitute()
-                        choice_substituted = self.display_open_food_fact.choice_favored_substitute()
-                        self.database.information_substitute_save(choice_substituted)
+                        self.database.\
+                            select_substitute_save()
+                        self.display_open_food_fact.\
+                            favored_information_substitute()
+                        choice_substituted = self.\
+                            display_open_food_fact.choice_favored_substitute()
+                        self.database.\
+                            information_substitute_save(choice_substituted)
                         break
 
                     except ValueError:
@@ -174,7 +182,8 @@ class Main:
                     try:
                         self.display_open_food_fact.delete_substitute()
                         self.database.select_substitute_save()
-                        choice_delete = self.display_open_food_fact.choice_delete_substitute()
+                        choice_delete = self.\
+                            display_open_food_fact.choice_delete_substitute()
                         self.database.delete_substitute(choice_delete)
                         break
 
