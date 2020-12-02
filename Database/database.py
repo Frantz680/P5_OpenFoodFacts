@@ -8,7 +8,7 @@ from Display.display import Display
 from glob import Glob
 
 """
-Import from mysql.connector Library.
+Import mysql.connector Library.
 
 Import different Class.
 """
@@ -25,6 +25,7 @@ class MySQL:
         """
         We build the instance of the class.
         """
+
         self.display_open_food_fact = Display()
 
         self.host = Glob.host
@@ -58,10 +59,6 @@ class MySQL:
         We are creating the database.
         """
 
-        """sql = open(Glob.file_database, 'r')
-        sql2 = " ".join(sql.readlines())
-        cursor.execute(sql2, multi=True)"""
-
         self.cursor.execute("DROP DATABASE IF EXISTS `database`;")
         self.cursor.execute("CREATE DATABASE `database`;")
         self.cursor.execute("USE `database`;")
@@ -91,6 +88,7 @@ class MySQL:
         """
         Connection to the database.
         """
+        
         self.db_connect = mysql.connector.connect(
             host=self.host,
             user=self.user,
@@ -113,8 +111,6 @@ class MySQL:
 
         self.db_connect.commit()
 
-        """print(self.cursor.rowcount, "record inserted.")"""
-
     def insert_data_product(
             self, p_category, p_product_name, p_product_url,
             p_product_shop, p_product_nutrition):
@@ -133,8 +129,6 @@ class MySQL:
         self.cursor.execute(sql, val)
 
         self.db_connect.commit()
-
-        """print(self.cursor.rowcount, "record inserted.")"""
 
     def select_category(self):
         """
@@ -214,8 +208,6 @@ class MySQL:
                         ord(self.food_nutrition) < nutri_substitue:
                     id_substitue = self.food_id
                     nutri_substitue = ord(self.food_nutrition)
-
-        "print(id_substitue, nutri_substitue)"
 
         select_substitue = 'SELECT food_name, food_url, food_shop, food_nutrition FROM Food\
                 WHERE Food.food_id = %s;'

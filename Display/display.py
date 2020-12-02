@@ -4,6 +4,10 @@ The class is used for display in the console.
 
 import time
 
+"""
+Import time Library.
+"""
+
 
 class Display:
     """

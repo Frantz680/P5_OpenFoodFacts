@@ -10,7 +10,7 @@ from Database.database import MySQL
 from glob import Glob
 
 """
-Import from requests, json Library.
+Import requests, json Library.
 
 Import different class.
 """
@@ -64,18 +64,11 @@ class Api:
 
         for category in range(Glob.nb_category + 1):
             category_choice_json = self.category_json["tags"][category - 1]
-            "print(category_choisi_json)"
 
             answer_category_json = json.loads(
                 requests.get(category_choice_json["url"] + ".json").text)
-            "print(answer_category_json)"
 
             for product in answer_category_json["products"]:
-                "emplacement += 1"
-
-                """print(produit["product_name"]
-                 + " -> " + str(emplacement))
-                 """
 
                 try:
                     product_name = product["product_name"]
