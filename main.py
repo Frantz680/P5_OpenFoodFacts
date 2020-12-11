@@ -115,7 +115,7 @@ class Main:
                      substitute and the saving of this one."""
 
                     self.display_open_food_fact.suggested_substitute()
-                    self.database.select_substitue(choice_category)
+                    self.database.select_substitute(choice_category)
                     saved = self.display_open_food_fact.substitute_saved()
 
                     if saved == "1":
