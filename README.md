@@ -62,7 +62,7 @@ Ceci vous lancera automatiquement l'application.
 
 -----------------
 
-##Description de l'application
+## Description de l'application
 
 L'utilisateur est sur le terminal. Ce dernier lui affiche les choix suivants:
 
@@ -74,15 +74,15 @@ Press 3 for exit.
 
 L'utilisateur sélectionne 1.
 
-*Le programme créer la base de données.
+* Le programme créer la base de données.
 
 L'utilisateur sélectionne 2.
 
-*Le programme ce connecte à la base de donnée qui est déjà créer.
+* Le programme ce connecte à la base de donnée qui est déjà créer.
 
 L'utilisateur sélectionne 3.
 
-*Le programme s'arrete.
+* Le programme s'arrete.
 
 Menu
 
