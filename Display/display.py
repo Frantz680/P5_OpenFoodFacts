@@ -78,7 +78,7 @@ class Display:
     def choice_category():
         """Display choice of categories."""
 
-        choice = (int(input("\nTap the category number.\n")),)
+        choice = (int(input("\nTap the category number :")),)
         return choice
 
     @staticmethod
@@ -91,7 +91,7 @@ class Display:
     def choice_product():
         """Display choice of products."""
 
-        choice = (int(input("\nTap the product number.\n")),)
+        choice = (int(input("\nTap the product number :")),)
         return choice
 
     @staticmethod
@@ -141,7 +141,7 @@ class Display:
     def choice_favored_substitute():
         """Display choice of favored substitutes."""
 
-        choice = (int(input("\nTap the substitute number.\n")),)
+        choice = (int(input("\nTap the substitute number :")),)
         return choice
 
     @staticmethod
@@ -154,7 +154,7 @@ class Display:
     def choice_delete_substitute():
         """Display the choice of substitutes to delete."""
 
-        choice = (int(input("\nTap the substitute number.\n")),)
+        choice = (int(input("\nTap the substitute number :")),)
         return choice
 
     """
