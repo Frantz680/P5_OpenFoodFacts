@@ -51,6 +51,8 @@ Ceci installera les differentes exigences du jeu.
 
 Remplacez les identifiant MySQL dans le fichier glob.py par les vôtres.
 
+Remplacez => your key <= par votre mot de passe dans le fichier .env.
+
 -----------------
 
 **Lancement de l'application**

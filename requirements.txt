@@ -1,3 +1,4 @@
 pylint==2.6.0
 mysql-connector-python==8.0.22
 requests==2.25.0
+python-dotenv~=0.15.0
