@@ -39,7 +39,7 @@ class MySQL:
         )
         self.cursor = self.db_connect.cursor()
 
-        self.cetegory_id = 0
+        self.category_id = 0
 
         self.cat_id = 0
         self.food_id = ""
@@ -69,14 +69,14 @@ class MySQL:
         self.cursor.execute("CREATE TABLE Food (\
                         food_id INT AUTO_INCREMENT NOT NULL,\
                         cat_id INT NOT NULL,\
-                        food_name VARCHAR(150) NOT NULL,\
+                        food_name VARCHAR(250) NOT NULL,\
                         food_url VARCHAR(300) NOT NULL,\
                         food_shop VARCHAR(300),\
                         food_nutrition CHAR(1),\
                         PRIMARY KEY (food_id, cat_id));")
         self.cursor.execute("CREATE TABLE Substitute (\
                 substitute_id INT AUTO_INCREMENT NOT NULL,\
-                substitute_name VARCHAR(150) NOT NULL,\
+                substitute_name VARCHAR(250) NOT NULL,\
                 substitute_url VARCHAR(300) NOT NULL,\
                 substitute_shop VARCHAR(300),\
                 substitute_nutrition CHAR(1),\
@@ -172,8 +172,9 @@ class MySQL:
 
         self.cursor = self.db_connect.cursor()
         self.cursor.execute("USE `database`;")
-        select_food = 'SELECT food_name, food_url, food_shop, food_nutrition FROM Food\
-        WHERE Food.food_id = %s;'
+        select_food = 'SELECT food_name, food_url, food_shop,' \
+                      ' UPPER(food_nutrition) AS food_nutrition_upper FROM Food\
+                        WHERE Food.food_id = %s;'
 
         self.cursor.execute(select_food, p_choice_product)
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition\
@@ -182,7 +183,7 @@ class MySQL:
                 self.food_name, self.food_url,
                 self.food_shop, self.food_nutrition)
 
-    def select_substitue(self, p_choice_category):
+    def select_substitute(self, p_choice_category):
         """
         In this method we select different columns
         from the Food table. But we also make a join
@@ -191,31 +192,33 @@ class MySQL:
 
         self.cursor = self.db_connect.cursor()
         self.cursor.execute("USE `database`;")
-        id_substitue = "1"
+        id_substitute = "1"
         # 102 ==  The letter "f" in ASCII
-        nutri_substitue = 102
-        substitue = 'SELECT food_id, food_nutrition FROM Food\
-                INNER JOIN Category\
-                ON Category.category_id = Food.cat_id\
-                WHERE Category.category_id = %s;'
+        nutri_substitute = 102
+        substitute = 'SELECT food_id, UPPER(food_nutrition) ' \
+                     'AS food_nutrition_upper FROM Food\
+                     INNER JOIN Category\
+                     ON Category.category_id = Food.cat_id\
+                     WHERE Category.category_id = %s;'
 
-        self.cursor.execute(substitue, p_choice_category)
+        self.cursor.execute(substitute, p_choice_category)
         for self.food_id, self.food_nutrition in self.cursor:
             "print(self.food_id, ord(self.food_nutrition))"
             for increment in range(5):
                 """print("increment" + str(increment + 97))"""
                 if ord(self.food_nutrition) <= increment + 97 and\
-                        ord(self.food_nutrition) < nutri_substitue:
-                    id_substitue = self.food_id
-                    nutri_substitue = ord(self.food_nutrition)
+                        ord(self.food_nutrition) < nutri_substitute:
+                    id_substitute = self.food_id
+                    nutri_substitute = ord(self.food_nutrition)
 
-        select_substitue = 'SELECT food_name, food_url, food_shop, food_nutrition FROM Food\
-                WHERE Food.food_id = %s;'
+        select_substitute = 'SELECT food_name, food_url, food_shop, ' \
+                            'UPPER(food_nutrition) AS food_nutrition_upper FROM Food\
+                            WHERE Food.food_id = %s;'
 
-        self.cursor.execute(select_substitue, (int(id_substitue),))
+        self.cursor.execute(select_substitute, (int(id_substitute),))
         for self.food_name, self.food_url, self.food_shop, self.food_nutrition\
                 in self.cursor:
-            self.display_open_food_fact.select_substitue_db(
+            self.display_open_food_fact.select_substitute_db(
                 self.food_name, self.food_url,
                 self.food_shop, self.food_nutrition)
 

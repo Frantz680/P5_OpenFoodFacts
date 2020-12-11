@@ -25,65 +25,77 @@ class Display:
     MENU
     """
 
-    def menu_connection(self):
+    @staticmethod
+    def menu_connection():
         """Menu connection."""
 
         choice = input("\n#### MENU CONNECTION ####\n\n"
                        "Press 1 for create database.\n"
                        "Press 2 to connect to the existing database.\n"
-                       "Press 3 for exit.\n")
+                       "Press 3 for exit.\n"
+                       "Tap the number :")
         return choice
 
-    def menu(self):
+    @staticmethod
+    def menu():
         """Menu display."""
 
         choice = input("\n#### MENU ####\n\n"
                        "Press 1 for research substituted.\n"
                        "Press 2 for my substituted foods.\n"
-                       "Press 3 for exit.\n")
+                       "Press 3 for exit.\n"
+                       "Tap the number :")
         return choice
 
-    def menu_error(self):
+    @staticmethod
+    def menu_error():
         """Error display of number entry for menu."""
 
         print("Please enter a number between 1-3.\nThank you.")
 
-    def menu_favored(self):
+    @staticmethod
+    def menu_favored():
         """Menu favored."""
 
         choice = input("\n#### FAVORED SUBSTITUTES ####\n\n"
                        "Press 1 to see favored substitutes.\n"
                        "Press 2 to remove substitutes.\n"
-                       "Press 3 to return to the menu.\n")
+                       "Press 3 to return to the menu.\n"
+                       "Tap the number :")
         return choice
 
     """
     Category and product
     """
 
-    def category(self):
+    @staticmethod
+    def category():
         """Display of categories."""
 
         print("#### The categories ####\n")
 
-    def choice_category(self):
+    @staticmethod
+    def choice_category():
         """Display choice of categories."""
 
         choice = (int(input("\nTap the category number.\n")),)
         return choice
 
-    def product(self):
+    @staticmethod
+    def product():
         """Display of products."""
 
         print("\n#### The products ####\n")
 
-    def choice_product(self):
+    @staticmethod
+    def choice_product():
         """Display choice of products."""
 
         choice = (int(input("\nTap the product number.\n")),)
         return choice
 
-    def choice_error(self):
+    @staticmethod
+    def choice_error():
         """Display choice error"""
 
         print("\nTap a number from the list.\nThank you.")
@@ -92,45 +104,54 @@ class Display:
     The substitute
     """
 
-    def suggested_substitute(self):
+    @staticmethod
+    def suggested_substitute():
         """Display of substitute product."""
 
         print("\nThe suggested substitute for this product is :")
 
-    def substitute_saved(self):
+    @staticmethod
+    def substitute_saved():
         """Display to record the replacement product."""
 
         choice = input("\nDo you want to save overrides ?"
-                       "\nPress 1 for yes.\nPress 2 for yes.\n")
+                       "\nPress 1 for yes.\nPress 2 for yes.\n"
+                       "Tap the number :")
         return choice
 
-    def suggested_substitute_error(self):
+    @staticmethod
+    def suggested_substitute_error():
         """Error display of number entry for substitute."""
 
         print("Please enter a number between 1-2.\nThank you.\n")
 
-    def favored_substitute(self):
+    @staticmethod
+    def favored_substitute():
         """Show substitutes save."""
 
         print("\n### Your substitutes save ###\n")
 
-    def favored_information_substitute(self):
+    @staticmethod
+    def favored_information_substitute():
         """Display substitute information select."""
 
         print("\nSelect your substitute to see the information.")
 
-    def choice_favored_substitute(self):
+    @staticmethod
+    def choice_favored_substitute():
         """Display choice of favored substitutes."""
 
         choice = (int(input("\nTap the substitute number.\n")),)
         return choice
 
-    def delete_substitute(self):
+    @staticmethod
+    def delete_substitute():
         """Show substituted backups to delete."""
 
         print("\nSelect the substitute to delete.\n")
 
-    def choice_delete_substitute(self):
+    @staticmethod
+    def choice_delete_substitute():
         """Display the choice of substitutes to delete."""
 
         choice = (int(input("\nTap the substitute number.\n")),)
@@ -140,65 +161,110 @@ class Display:
     API
     """
 
-    def loading_categories(self):
+    @staticmethod
+    def loading_categories():
+        """Loading categories into the database."""
+
         print("Loading categories into the database.")
 
-    def loading_point_category(self):
+    @staticmethod
+    def loading_point_category():
+        """Loading categories."""
+
         print(".", end="")
         time.sleep(0.009)
 
-    def loading_completed_categories(self):
+    @staticmethod
+    def loading_completed_categories():
+        """Loading completed categories."""
+
         print("\nLoading completed.")
 
-    def loading_food(self):
+    @staticmethod
+    def loading_food():
+        """Loading food into the database."""
+
         print("Loading food into the database.")
 
-    def loading_point_food(self):
+    @staticmethod
+    def loading_point_food():
+        """Loading food."""
+
         print(".", end="")
 
-    def loading_completed_food(self):
+    @staticmethod
+    def loading_completed_food():
+        """Loading completed food."""
+
         print("\nLoading completed.")
 
     """
     Database
     """
 
-    def create_database(self):
+    @staticmethod
+    def create_database():
+        """Creation of the database."""
+
         print("Creation of the database.")
 
-    def connection_database(self):
+    @staticmethod
+    def connection_database():
+        """Connection to the database."""
+
         print("Connection to the database.")
 
-    def select_category_db(self, p_category_id, p_name):
+    @staticmethod
+    def select_category_db(p_category_id, p_name):
+        """Category displays."""
+
         print(str(p_category_id) + "->" + str(p_name))
 
-    def select_cat_food_db(self, p_food_id, p_food_name):
+    @staticmethod
+    def select_cat_food_db(p_food_id, p_food_name):
+        """Product displays."""
+
         print(str(p_food_id) + "->" + str(p_food_name))
 
+    @staticmethod
     def select_food_db(
-            self, p_food_name, p_food_url,
+            p_food_name, p_food_url,
             p_food_shop, p_food_nutri):
+        """Product display select."""
+
         print("The product you have selected is:")
         print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url))
         print("\nSHOP->" + str(p_food_shop) + "\nNUTRI->" + str(p_food_nutri))
 
-    def select_substitue_db(
-            self, p_food_name, p_food_url,
+    @staticmethod
+    def select_substitute_db(
+            p_food_name, p_food_url,
             p_food_shop, p_food_nutri):
+        """Substitute display select."""
+
         print("\nNAME->" + str(p_food_name) + "\nURL->" + str(p_food_url))
         print("\nSHOP->" + str(p_food_shop) + "\nNUTRI->" + str(p_food_nutri))
 
-    def select_substitute_save_db(self, p_substitute_id, p_substitute_name):
+    @staticmethod
+    def select_substitute_save_db(p_substitute_id, p_substitute_name):
+        """Display of substitutes save."""
+
         print(str(p_substitute_id) + "->" + str(p_substitute_name))
 
+    @staticmethod
     def information_substitute_save_db(
-            self, p_substitute_name, p_substitute_url,
+            p_substitute_name, p_substitute_url,
             p_substitute_shop, p_substitute_nutrition):
+        """Display information about the substitute select."""
+
         print("\nNAME->" + str(p_substitute_name)
               + "\nURL->" + str(p_substitute_url))
         print("\nSHOP->" + str(p_substitute_shop)
               + "\nNUTRI->" + str(p_substitute_nutrition))
 
-    def delete_substitute_db(self, p_choice_delete):
+    @staticmethod
+    def delete_substitute_db(p_choice_delete):
+        """Display of the substitute number delete."""
+
         print("You have deleted the substitute number: " +
               str(p_choice_delete[0]))
